@@ -1,0 +1,40 @@
+local dimen = require("main.modules.dimensions")
+local camera = require("orthographic.camera")
+
+local CAMERA_ID = hash("/camera")
+
+
+function init(self)
+    camera.use_projector(CAMERA_ID, camera.PROJECTOR.FIXED_AUTO)
+    handleBackgroundScale()
+end
+
+
+function handleBackgroundScale()
+
+    local initScreenRatio = dimen.SCREEN_WIDTH / dimen.SCREEN_HEIGHT
+
+    window.set_listener(function()
+
+        local newWidth, newHeight = window.get_size()
+        local newRatio = newWidth / newHeight
+
+        local scale
+
+        if newRatio == initScreenRatio then
+            print("ratio is equal")
+        else
+            if newRatio > initScreenRatio then
+                -- width get larger relation to height
+                local heightMust = newWidth / initScreenRatio
+                scale = heightMust / newHeight
+            else
+                -- height get larger relation to width
+                local widthMust = initScreenRatio * newHeight
+                scale = widthMust / newWidth
+            end
+            go.set("/background#sprite", "scale", scale * vmath.vector3(1))
+        end
+
+    end)
+end

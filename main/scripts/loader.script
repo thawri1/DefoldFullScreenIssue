@@ -1,0 +1,26 @@
+function init(self)
+    msg.post(".", "acquire_input_focus")
+    msg.post(".", "show_main_menu")
+end
+
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("load_game") then
+        local proxy = "#game_proxy"
+        msg.post(proxy, "load")
+    elseif message_id == hash("show_main_menu") then
+        msg.post("#main_menu_proxy", "load")
+    elseif message_id == hash("unload_proxy") then
+        local proxy = message.proxy
+        msg.post(proxy, "disable")
+        msg.post(proxy, "final")
+        msg.post(proxy, "unload")
+    elseif message_id == hash("unload_game") then
+        msg.post(".", "unload_proxy", { proxy = "#game_proxy" })
+    elseif message_id == hash("unload_menu") then
+        msg.post(".", "unload_proxy", { proxy = "#main_menu_proxy" })
+    elseif message_id == hash("proxy_loaded") then
+        msg.post(sender, "init")
+        msg.post(sender, "enable")
+    end
+end

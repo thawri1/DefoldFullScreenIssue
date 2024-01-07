@@ -1,0 +1,41 @@
+[bootstrap]
+main_collection = /main/collection/main.collectionc
+render = /orthographic/render/orthographic.renderc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1080
+height = 1920
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = FullScreen
+version = 0.8
+dependencies#0 = https://github.com/britzl/defold-orthographic/archive/refs/tags/3.3.0.zip
+dependencies#1 = https://github.com/subsoap/defos/archive/refs/tags/v2.7.1.zip
+
+[sprite]
+max_count = 256
+
+[physics]
+max_collisions = 256
+max_collision_object_count = 256
+
+[html5]
+heap_size = 64
+cssfile = /builtins/manifests/web/dark_theme.css
+show_fullscreen_button = 1
+show_made_with_defold = 1
+scale_mode = downscale_fit
+
+[defos]
+view_width = 720
+view_height = 1280
+view_x = 1800
+view_y = 0
+
