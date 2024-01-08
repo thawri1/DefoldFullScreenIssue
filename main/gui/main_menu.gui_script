@@ -1,5 +1,18 @@
 function init(self)
     msg.post(".", "acquire_input_focus")
-    msg.post(".", "animate_gui")
+
+    local node = gui.get_node("mark")
+    local scale_to = gui.get_scale(node)
+    gui.set_scale(node, vmath.vector3(0.00001))
+    gui.animate(node, "scale", scale_to, gui.EASING_LINEAR, 1, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+
 end
 
+function on_input(self, action_id, action)
+    if action.pressed then
+        if gui.pick_node(gui.get_node("exit_button"), action.x, action.y) then
+            print("exit")
+            sys.exit(0)
+        end
+    end
+end
